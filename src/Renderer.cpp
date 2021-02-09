@@ -51,6 +51,18 @@ void Renderer::renderSprite(Sprite* sprite, float x, float y, float scale, doubl
   //TaDaaa...anyway
 }
 
+void Renderer::renderTile(Tile* tile, Tilemap* tilemap) {
+  SDL_Texture* texture = tile->getTileset()->getTexture();
+  SDL_Rect srect = tile->getTileset()->getBaseFrameByTileID(tile->getTID());
+  SDL_Rect drect = {
+    (tile->getGID() % tilemap->_n_rows) * tilemap->_grid_w,
+    (tile->getGID() / tilemap->_n_rows) * tilemap->_grid_h,
+    tilemap->_grid_w,
+    tilemap->_grid_h  
+  };
+  renderTexture(texture, srect, drect, 0.0, NULL, SDL_FLIP_NONE);
+}
+
 // simplest
 void Renderer::renderSprite(Sprite* sprite,float x,float y) {
   renderSprite(sprite, x, y, 1.0, 0.0, NULL, SDL_FLIP_NONE);

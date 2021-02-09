@@ -100,9 +100,10 @@ void Game::pollEvents() {
 */
 
 void Game::draw() {
+  for (auto& i : _tiles)
+    _renderer->renderTile(i, _tilemap);
   for (auto& i : _objects)
     i->draw();
-
   _renderer->clear();
 }
 
@@ -125,6 +126,10 @@ bool Game::initGame()
   texture_man = new TextureManager();
   loadTextures("texture.conf");
   addTileset("sokoban", 64, 64, 8, 13);
+  _tilemap = new Tilemap(4, 4, GRID_SIZE, GRID_SIZE);
+  for (int i = 0; i < _tilemap->_grid_size; ++i) {
+    _tiles.push_back(new Tile(89, _tilesets["sokoban"], i));
+  }
   playerobj = new Player(*this, ObjectType::PLAYER, 0.0, 0.0, 64, 64, _tilesets["sokoban"]);
   _objects.push_back(playerobj);
   return true;

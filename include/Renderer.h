@@ -5,7 +5,8 @@
 
 #include "Window.h" // for now i wont make it independent of Window class // i will now ;)
 #include "Sprite.h"
-
+#include "Tile.h"
+#include "Tilemap.h"
 
 const SDL_Color red = { 255, 0, 0, 255 };
 
@@ -38,6 +39,7 @@ class Renderer{
   void renderText(const char* text, int x, int y, TTF_Font* font, SDL_Color color);  
   void renderTexture(SDL_Texture* texture, SDL_Rect srcrect, SDL_Rect drect, double angle, SDL_Point* center, SDL_RendererFlip flip);
   void renderTexture(SDL_Texture* texture, int x, int y);
+  void renderTile(Tile* tile, Tilemap* tilemap);
   //idk how to create a formatted std::string so...sprintf anyday ;] //use stringstream dumbhead
   void renderRect(float x, float y, int w, int h, std::string color);
   void renderFillRect(int x, int y, int w, int h, std::string color);

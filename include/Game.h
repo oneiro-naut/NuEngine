@@ -7,10 +7,13 @@
 #include "GameObject.h"
 #include "TextureManager.h"
 #include "Tileset.h"
+#include "Tilemap.h"
 
-// NES Screen Resolutions
+// Game Screen Resolution
 #define SCREEN_W 256
 #define SCREEN_H 256
+
+#define GRID_SIZE 64
 
 //forward declaration needed because of circular dependency between the classes Game n GameObject
 class GameObject;
@@ -29,13 +32,14 @@ class Game {
   TextureManager* texture_man;
   std::unordered_map<std::string, Tileset*> _tilesets;
   SDL_Rect _camera;//just for a simple compile 
+
   Window* _window;
   Renderer* _renderer; 
   bool _running;
   GameObject* playerobj;
-  //std::vector<Tile*> _tiles;
+  std::vector<Tile*> _tiles;
+  Tilemap* _tilemap;
   std::vector<GameObject*> _objects;
-  //std::string _level_map; // not being used
   std::unordered_map<std::string, SDL_Texture*> game_textures;
   void updateCamera();  
   bool initGame();
