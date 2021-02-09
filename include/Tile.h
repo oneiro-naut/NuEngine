@@ -9,11 +9,12 @@ class Tile {
   bool _visible;
   bool _active;
   int _tid;
+  /*collision_flags _collision_flags;*/
   Tileset* _tileset;
   int _grid_id; // equivalent to position
  public:
-  Tile(int tid, Tileset* tileset, int gid);
-  Tile(int tid, Tileset* tileset, int gid, bool visible, bool active);
+  Tile(int tid, Tileset* tileset, int gid/*, collision_flags cf*/);
+  Tile(int tid, Tileset* tileset, int gid,/*, collision_flags cf*/ bool visible, bool active);
   ~Tile();
   virtual void draw() const;
   bool isVisible() const { return _visible; }
