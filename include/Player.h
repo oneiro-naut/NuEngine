@@ -28,6 +28,6 @@ class Player : public Controllable {
   virtual void checkBoundaryCollision() override;
   //umm this is redundant
   virtual void resolveCollision(ObjectType withtype,SDL_Rect overlap_r) override;
+  virtual void updateCoordinates() override;
 };
-
 #endif

@@ -34,6 +34,8 @@ void Game::loadLevel(std::string path) {
 }
 
 void Game::update() {
+  for (auto& i : _objects)
+    i->update();
 }
 
 SDL_Rect Game::positionwrtCamera(GameObject* o) {
@@ -131,7 +133,7 @@ bool Game::initGame()
   for (int i = 0; i < _tilemap->_grid_size; ++i) {
     _tiles.push_back(new Tile(89, _tilesets["sokoban"], i));
   }
-  playerobj = new Player2(*this, ObjectType::PLAYER, 0.0, 0.0, 64, 64, _tilesets["sokoban"]);
+  playerobj = new Player(*this, ObjectType::PLAYER, 0.0, 0.0, 64, 64, _tilesets["sokoban"]);
   _objects.push_back(playerobj);
   return true;
 }

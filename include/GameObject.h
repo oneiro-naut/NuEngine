@@ -64,6 +64,7 @@ class GameObject {
   //virtual SDL_Rect getNextFrame();
   virtual void checkBoundaryCollision(); //umm this is redundant
   virtual void resolveCollision(ObjectType withtype,SDL_Rect overlap_r);
+  virtual void updateCoordinates() = 0;
 
  public:
   GameObject(Game &g, ObjectType otype, float x, float y, int w, int h, Tileset* ts);

@@ -5,11 +5,11 @@
 
 class Player2 : public Player {
  protected:
-  virtual void onUserInput(SDL_Event* e) override;
-
+  virtual void updateCoordinates() override;
  public:
   Player2(Game &g, ObjectType otype, float x, float y, int w, int h, Tileset* ts);
   ~Player2();
+  
 };
 
 #endif
