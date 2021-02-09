@@ -3,7 +3,8 @@
 #include <sstream>
 
 #include "Game.h"
-#include "Player.h"
+//#include "Player.h"
+#include "Player2.h"
 #include "Rectangle.h"
 
 
@@ -130,7 +131,7 @@ bool Game::initGame()
   for (int i = 0; i < _tilemap->_grid_size; ++i) {
     _tiles.push_back(new Tile(89, _tilesets["sokoban"], i));
   }
-  playerobj = new Player(*this, ObjectType::PLAYER, 0.0, 0.0, 64, 64, _tilesets["sokoban"]);
+  playerobj = new Player2(*this, ObjectType::PLAYER, 0.0, 0.0, 64, 64, _tilesets["sokoban"]);
   _objects.push_back(playerobj);
   return true;
 }
