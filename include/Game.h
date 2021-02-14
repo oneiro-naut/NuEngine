@@ -6,6 +6,7 @@
 #include "Renderer.h"
 #include "GameObject.h"
 #include "Image.h"
+#include "movingImage.h"
 #include "TextureManager.h"
 #include "Tileset.h"
 #include "Tilemap.h"
@@ -39,6 +40,7 @@ class Game {
   Renderer* _renderer; 
   bool _running;
   GameObject* playerobj;
+  Image* _mountain;
   Image* _cloud;
   std::vector<Tile*> _tiles;
   Tilemap* _tilemap;

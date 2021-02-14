@@ -5,6 +5,7 @@
 #include "Vector2d.h"
 
 class Image {
+ protected:
   Vector2d _position;
   int _img_w;
   int _img_h;

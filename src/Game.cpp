@@ -51,8 +51,8 @@ void Game::repositionImage() {
 void Game::update() {
   _cloud->update();
   repositionImage();
-  for (auto& i : _objects)
-    i->update();
+  // for (auto& i : _objects)
+  //   i->update();
 }
 
 SDL_Rect Game::positionwrtCamera(GameObject* o) {
@@ -98,7 +98,7 @@ void Game::pollEvents() {
   SDL_Event event;
   while (SDL_PollEvent(&event) != 0) {
     _window->pollEvents(&event);
-    playerobj->getInput(&event);
+    //playerobj->getInput(&event);
     if (_window->isClosed())
       _running = false;
   }
@@ -120,10 +120,11 @@ void Game::pollEvents() {
 */
 
 void Game::draw() {
-  for (auto& i : _tiles)
-    _renderer->renderTile(i, _tilemap);
-  for (auto& i : _objects)
-    i->draw();
+  // for (auto& i : _tiles)
+  //   _renderer->renderTile(i, _tilemap);
+  // for (auto& i : _objects)
+  //  i->draw();
+  _renderer->renderImage(_mountain);
   _renderer->renderImage(_cloud);
 
   _renderer->clear();
@@ -146,15 +147,16 @@ bool Game::initGame()
   _renderer->addColor("blue", (SDL_Color){0, 0, 255, 255});
   _camera = createRectangle(0, 0, SCREEN_W, SCREEN_H);
   texture_man = new TextureManager();
-  loadTextures("texture.conf");
-  addTileset("sokoban", 64, 64, 8, 13);
-  _tilemap = new Tilemap(4, 4, GRID_SIZE, GRID_SIZE);
-  for (int i = 0; i < _tilemap->_grid_size; ++i) {
-    _tiles.push_back(new Tile(89, _tilesets["sokoban"], i));
-  }
-  playerobj = new Player(*this, ObjectType::PLAYER, 0.0, 0.0, 64, 64, _tilesets["sokoban"]);
-  _objects.push_back(playerobj);
-  _cloud = new Image(_camera.w/2, _camera.h/2, 64, 64, texture_man->loadFromFile("assets/cloud.png", _renderer->getRenderer()));
+  // loadTextures("texture.conf");
+  // addTileset("sokoban", 64, 64, 8, 13);
+  // _tilemap = new Tilemap(4, 4, GRID_SIZE, GRID_SIZE);
+  // for (int i = 0; i < _tilemap->_grid_size; ++i) {
+  //   _tiles.push_back(new Tile(89, _tilesets["sokoban"], i));
+  // }
+  //playerobj = new Player(*this, ObjectType::PLAYER, 0.0, 0.0, 64, 64, _tilesets["sokoban"]);
+  //_objects.push_back(playerobj);
+  _mountain = new Image(0, 0, _camera.w, _camera.h, texture_man->loadFromFile("assets/mountain.png", _renderer->getRenderer()));
+  _cloud = new movingImage(_camera.w/2, 0, 64, 64, -1, 0, texture_man->loadFromFile("assets/cloud.png", _renderer->getRenderer()));
   return true;
 }
 

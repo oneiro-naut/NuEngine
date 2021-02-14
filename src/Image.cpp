@@ -8,5 +8,5 @@ Image::~Image() {
 }
 
 void Image::update() {
-  _position.x -= 1;
+  
 }
