@@ -28,6 +28,12 @@ void Renderer::renderTexture(SDL_Texture* texture, SDL_Rect srcrect, SDL_Rect dr
     fprintf(stderr, "[%s: %d]Warning: Could not render copy, error: %s\n",__FILE__, __LINE__, SDL_GetError());
 }
 
+void Renderer::renderTexture(SDL_Texture* texture, SDL_Rect drect) {
+  if (SDL_RenderCopyEx(this->_renderer, texture, NULL, &drect, 0.0, NULL, SDL_FLIP_NONE));
+    fprintf(stderr, "[%s: %d]Warning: Could not render copy, error: %s\n",__FILE__, __LINE__, SDL_GetError());  
+}
+
+
 void Renderer::renderTexture(SDL_Texture* texture, int x, int y) {
   int w, h;
   SDL_QueryTexture(texture, NULL, NULL, &w, &h);
@@ -135,4 +141,9 @@ void Renderer::renderFillRect(int x, int y, int w, int h, std::string color) {
 
 SDL_Renderer* Renderer::getRenderer() {
   return _renderer;
+}
+
+void Renderer::renderImage(Image* img) {
+  SDL_Rect drect = { static_cast<int>(img->getXpos()), static_cast<int>(img->getYpos()), img->getW(), img->getH() };
+  renderTexture(img->getTexture(), drect);
 }

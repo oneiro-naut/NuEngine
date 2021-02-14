@@ -33,7 +33,24 @@ void Game::deleteTextures() {
 void Game::loadLevel(std::string path) {
 }
 
+void Game::repositionImage() {
+  int ximg = _cloud->getXpos();
+  int yimg = _cloud->getYpos();
+  int imgw = _cloud->getW();
+  int imgh = _cloud->getH();
+  if (ximg + imgw <= 0)
+    _cloud->changeX(_camera.w);
+  if (yimg + imgh <= 0)
+    _cloud->changeY(_camera.h);
+  if (ximg >= _camera.w)
+    _cloud->changeX(0);
+  if (yimg >= _camera.h)
+    _cloud->changeY(0);
+}
+
 void Game::update() {
+  _cloud->update();
+  repositionImage();
   for (auto& i : _objects)
     i->update();
 }
@@ -107,6 +124,8 @@ void Game::draw() {
     _renderer->renderTile(i, _tilemap);
   for (auto& i : _objects)
     i->draw();
+  _renderer->renderImage(_cloud);
+
   _renderer->clear();
 }
 
@@ -135,6 +154,7 @@ bool Game::initGame()
   }
   playerobj = new Player(*this, ObjectType::PLAYER, 0.0, 0.0, 64, 64, _tilesets["sokoban"]);
   _objects.push_back(playerobj);
+  _cloud = new Image(_camera.w/2, _camera.h/2, 64, 64, texture_man->loadFromFile("assets/cloud.png", _renderer->getRenderer()));
   return true;
 }
 

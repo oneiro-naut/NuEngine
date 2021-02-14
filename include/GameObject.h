@@ -1,11 +1,13 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
+
 #include <unordered_map>
 #include <vector>
 #include <string>
 #include <array>
 
 #include "Game.h"
+#include "Vector2d.h"
 
  //**not an abstract base class anymore
 
@@ -30,6 +32,9 @@ class GameObject {
   SDL_Texture* _texture;
   Tileset* _tileset;
   bool _alive;
+  Vector2d _position;
+  Vector2d _velocity;
+  Vector2d _acceleration;
   float _x, _y;// these will be static_cast<int>()-ed
   float _vx,_vy;// 
   float _ax,_ay;// velocity n acceleration arent that universal ig

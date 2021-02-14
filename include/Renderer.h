@@ -4,6 +4,7 @@
 #include <string>
 
 #include "Window.h" // for now i wont make it independent of Window class // i will now ;)
+#include "Image.h"
 #include "Sprite.h"
 #include "Tile.h"
 #include "Tilemap.h"
@@ -36,9 +37,11 @@ class Renderer{
   void renderSprite(Sprite* sprite, float x, float y, float scale, SDL_RendererFlip flip);
   void renderSprite(Sprite* sprite, float x, float y, float scale, double angle, SDL_Point* center, SDL_RendererFlip flip);
   // char * rules because i m illiterate when it comes to string...well...not really
+  void renderImage(Image* img);
   void renderText(const char* text, int x, int y, TTF_Font* font, SDL_Color color);  
   void renderTexture(SDL_Texture* texture, SDL_Rect srcrect, SDL_Rect drect, double angle, SDL_Point* center, SDL_RendererFlip flip);
   void renderTexture(SDL_Texture* texture, int x, int y);
+  void renderTexture(SDL_Texture* texture, SDL_Rect drect);
   void renderTile(Tile* tile, Tilemap* tilemap);
   //idk how to create a formatted std::string so...sprintf anyday ;] //use stringstream dumbhead
   void renderRect(float x, float y, int w, int h, std::string color);

@@ -5,6 +5,7 @@
 
 #include "Renderer.h"
 #include "GameObject.h"
+#include "Image.h"
 #include "TextureManager.h"
 #include "Tileset.h"
 #include "Tilemap.h"
@@ -28,6 +29,7 @@ class Game {
   void draw();
   void loadLevel(std::string path);
   Renderer* getRenderer();
+
  private:
   TextureManager* texture_man;
   std::unordered_map<std::string, Tileset*> _tilesets;
@@ -37,10 +39,12 @@ class Game {
   Renderer* _renderer; 
   bool _running;
   GameObject* playerobj;
+  Image* _cloud;
   std::vector<Tile*> _tiles;
   Tilemap* _tilemap;
   std::vector<GameObject*> _objects;
   std::unordered_map<std::string, SDL_Texture*> game_textures;
+  
   void updateCamera();  
   bool initGame();
   bool loadTextures(std::string configpath);
@@ -54,5 +58,6 @@ class Game {
   SDL_Rect positionwrtCamera(GameObject* o);
   void updateCollision();
   void checkCollision(GameObject* obj1, GameObject* obj2); // in future a collision class as well which can do complex stuff
+  void repositionImage();
 };
 #endif
