@@ -13,8 +13,8 @@ SDL_Rect createRectangle(int x,int y,int w,int h)
 
 
 
-
-SDL_Rect getOverlapRect(SDL_Rect r1,SDL_Rect r2)//found it physics n-body-simulation
+//found it physics n-body-simulation
+SDL_Rect getOverlapRect(SDL_Rect r1,SDL_Rect r2)
 {
     int x0=r1.x;
     int y0=r1.y;

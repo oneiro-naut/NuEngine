@@ -1,7 +1,14 @@
 #ifndef TILEMAP_H
 #define TILEMAP_H
 
+#include <string>
+
+/*to do:
+  parse it from a tmx file
+*/
+
 struct Tilemap {
+  /*const std::string _orientation;*/
   const int _n_rows;
   const int _n_cols;
   const int _grid_w;

@@ -1,6 +1,7 @@
 #ifndef _TILE_H
 #define _TILE_H
 
+#include <string>
 #include "Tileset.h"
 #include "Collision.h"
 
@@ -8,6 +9,7 @@ class Tile {
  protected:
   bool _visible;
   bool _active;
+  std::string _type; // if tile is associated with some object
   int _tid;
   /*collision_flags _collision_flags;*/
   Tileset* _tileset;
