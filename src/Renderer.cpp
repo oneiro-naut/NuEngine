@@ -10,8 +10,9 @@ Renderer::Renderer(SDL_Window* win): _pwin(win) {
 }
 
 //can add options here this will be the default tho
-void Renderer::createRenderer() { 
-  _renderer= SDL_CreateRenderer(_pwin, -1, SDL_RENDERER_ACCELERATED);
+void Renderer::createRenderer() {
+  // vertical sync(v-sync) enabled
+  _renderer= SDL_CreateRenderer(_pwin, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
   if (_renderer == nullptr) {
       std::cerr << "Failed to create renderer\n";
       return;

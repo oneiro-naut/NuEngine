@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <chrono>
 
 #include "Game.h"
 //#include "Player.h"
@@ -10,16 +11,15 @@
 
 Game::Game() {
   _running = initGame();
-  std::cout << _running << "\n";
   std::cout << "Created Game\n";
 }
 
 Game::~Game()
 {
   deleteTextures();
-  std::cout<<"Destroying Game\n";
   //Quit SDL_ttf
   TTF_Quit();
+  std::cout << "Destroyed Game\n";
 }
 
 void Game::deleteTextures() {
@@ -104,12 +104,24 @@ void Game::pollEvents() {
 * every key press changes the state of game        
 */
 
+void printFPS() {
+    static std::chrono::time_point<std::chrono::steady_clock> oldTime = std::chrono::steady_clock::now();
+    static int fps; fps++;
+
+    if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - oldTime) >= std::chrono::seconds{ 1 }) {
+        oldTime = std::chrono::steady_clock::now();
+        std::cout << "FPS: " << fps <<  std::endl;
+        fps = 0;
+    }
+}
 void Game::draw() {
   // for (auto& i : _tiles)
   //   _renderer->renderTile(i, _tilemap);
   // for (auto& i : _objects)
   //  i->draw();
+  _renderer->renderFillRect(_camera.x, _camera.y, _camera.w, _camera.h, "green");
   _renderer->clear();
+  printFPS();
 }
 
 bool Game::initGame()
