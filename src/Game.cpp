@@ -9,9 +9,7 @@
 
 
 Game::Game() {
-  _running = true;
-  if(!initGame())
-    _running = false;
+  _running = initGame();
   std::cout << _running << "\n";
   std::cout << "Created Game\n";
 }
@@ -34,22 +32,9 @@ void Game::loadLevel(std::string path) {
 }
 
 void Game::repositionImage() {
-  int ximg = _cloud->getXpos();
-  int yimg = _cloud->getYpos();
-  int imgw = _cloud->getW();
-  int imgh = _cloud->getH();
-  if (ximg + imgw <= 0)
-    _cloud->changeX(_camera.w);
-  if (yimg + imgh <= 0)
-    _cloud->changeY(_camera.h);
-  if (ximg >= _camera.w)
-    _cloud->changeX(0);
-  if (yimg >= _camera.h)
-    _cloud->changeY(0);
 }
 
 void Game::update() {
-  _cloud->update();
   repositionImage();
   // for (auto& i : _objects)
   //   i->update();
@@ -124,9 +109,6 @@ void Game::draw() {
   //   _renderer->renderTile(i, _tilemap);
   // for (auto& i : _objects)
   //  i->draw();
-  _renderer->renderImage(_mountain);
-  _renderer->renderImage(_cloud);
-
   _renderer->clear();
 }
 
@@ -135,28 +117,29 @@ bool Game::initGame()
   _window = new Window("Game", SCREEN_W, SCREEN_H);
   if (_window->getWindow() == nullptr) {
     std::cerr << "failed to create window\n";
-    _running = false;
+    return false;
   }
+  std::cout << "Created window\n";
+
   _renderer = new Renderer(_window->getWindow());
   if (_renderer->getRenderer() == nullptr) {
     std::cerr << "failed to create renderer\n";
-    _running = false;
+    return false;
   }
+  std::cout << "Created renderer\n";
+
   _renderer->addColor("red", (SDL_Color){255, 0, 0, 255});
   _renderer->addColor("green", (SDL_Color){0, 255, 0, 255});
   _renderer->addColor("blue", (SDL_Color){0, 0, 255, 255});
   _camera = createRectangle(0, 0, SCREEN_W, SCREEN_H);
+  std::cout << "Initialized renderer\n";
+
   texture_man = new TextureManager();
-  // loadTextures("texture.conf");
-  // addTileset("sokoban", 64, 64, 8, 13);
-  // _tilemap = new Tilemap(4, 4, GRID_SIZE, GRID_SIZE);
-  // for (int i = 0; i < _tilemap->_grid_size; ++i) {
-  //   _tiles.push_back(new Tile(89, _tilesets["sokoban"], i));
-  // }
-  //playerobj = new Player(*this, ObjectType::PLAYER, 0.0, 0.0, 64, 64, _tilesets["sokoban"]);
-  //_objects.push_back(playerobj);
+  std::cout << "Created texture manager\n";
+#if 0
   _mountain = new Image(0, 0, _camera.w, _camera.h, texture_man->loadFromFile("assets/mountain.png", _renderer->getRenderer()));
   _cloud = new movingImage(_camera.w/2, 0, 64, 64, -1, 0, texture_man->loadFromFile("assets/cloud.png", _renderer->getRenderer()));
+#endif
   return true;
 }
 
@@ -195,7 +178,6 @@ bool Game::addTileset(std::string name, int tile_w, int tile_h, int n_rows, int 
     _tilesets.emplace(name, tileset);
   return true;
 }
-
 
 bool Game::loadTilesets(std::string tlstfile) {
   return true;

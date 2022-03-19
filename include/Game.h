@@ -21,7 +21,7 @@
 class GameObject;
 
 class Game {
- public:
+public:
   Game();
   ~Game();
   bool isRunning() const;
@@ -31,7 +31,7 @@ class Game {
   void loadLevel(std::string path);
   Renderer* getRenderer();
 
- private:
+private:
   TextureManager* texture_man;
   std::unordered_map<std::string, Tileset*> _tilesets;
   SDL_Rect _camera;//just for a simple compile 

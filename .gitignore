@@ -40,6 +40,8 @@
 *.app
 
 ### vscode ###
+NuEngine_extra/*
+bin/*
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json

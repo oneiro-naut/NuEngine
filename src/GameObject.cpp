@@ -4,18 +4,24 @@ using namespace std;
 //having 3 constructors n only 1 of them having renderer init caused undefined behaviour therefore make only 1 base contructor for 
 //every entity to avoid further ambuities
 
-GameObject::GameObject(Game& g, ObjectType otype, float x, float y, int w, int h, Tileset* ts):_game(g), _otype(otype), _x(x),_y(y),_w(w),_h(h), _tileset(ts)
+GameObject::GameObject(Game& g, ObjectType otype, float x, float y, int w, int h, Tileset* ts) : _game(g)
 {
+  _otype = otype;
+  _x = x;
+  _y = y;
+  _w = w;
+  _h = h;
+  _tileset = ts;
   _vx = 0.0;
   _vy = 0.0;
   _ax = 0.0;
   _ay = 0.0;
   _texture = _tileset->getTexture();
   _renderer = _game.getRenderer();
-    if(!initSprites())
-    {
-      _alive = false;
-    }
+  if(!initSprites())
+  {
+    _alive = false;
+  }
 }
 
 GameObject::~GameObject()
