@@ -42,6 +42,7 @@
 ### vscode ###
 NuEngine_extra/*
 bin/*
+obj/*
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
